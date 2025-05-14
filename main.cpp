@@ -2,5 +2,7 @@
 
 int main()
 {
-    std::cout << "Matija!!";
+    std::cout << "Matija Stublin";
+    std::cout << "Svinjaric!";
+
 }
