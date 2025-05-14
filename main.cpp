@@ -6,4 +6,6 @@ int main()
     std::cout << "Svinjaric!";
     std::cout << "Zebic";
     std::cout << "Damjanic";
+    std::cout << "Ožvald";
+    ;
 }
