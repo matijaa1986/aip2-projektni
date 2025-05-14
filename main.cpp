@@ -7,5 +7,5 @@ int main()
     std::cout << "Zebic";
     std::cout << "Damjanic";
     std::cout << "Ožvald";
-    ;
+    std::cout << "Vranic";
 }
