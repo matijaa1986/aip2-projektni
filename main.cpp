@@ -11,15 +11,15 @@ void ispisPloce(char ploca[10][10], int ispisBroda)
         for (int j = 0; j < 10; j++)
         {
             if (ploca[i][j] == 'V')
-                cout << "🌊 ";
+                cout << "~ ";
             else if (ploca[i][j] == 'B' && ispisBroda == 1)
-                cout << "🚢 ";
+                cout << "B ";
             else if (ploca[i][j] == 'B' && ispisBroda == 0)
-                cout << "🌊 ";
+                cout << "~ ";
             else if (ploca[i][j] == 'H')
-                cout << "💥 ";
+                cout << "O ";
             else if (ploca[i][j] == 'X')
-                cout << "❌ ";
+                cout << "X ";
         }
         cout << endl;
     }
