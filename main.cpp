@@ -30,3 +30,18 @@ void unosenjeKoordinata(int *red, int *stupac)
     (*red)--;
     (*stupac)--;
 }
+int main()
+{
+    int izbor;
+    cout << "       Tin Svinjaric i Matija Štublin" << endl;
+    cout << "  ____        _   _   _      ____  _     _ " << endl
+         << " | ** )  ** *| |*| |_| | ___/ ___|| |__ (_)_ __" << endl
+         << " |  * \\ / *` | **| **| |/ * \\*__ \\| '_ \\| | '_ \\" << endl
+         <<   " | |_) | (_| | |_| |_| |  **/**_) | | | | | |_) |" << endl
+         << " |____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/ " << endl
+         << "                                          |_|    " << endl;
+    cout << endl;
+    int igracNaRedu = 1;
+
+    return 0;
+}
