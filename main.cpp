@@ -45,3 +45,15 @@ int main()
 
     return 0;
 }
+while (1)
+{
+    cout << "Izbornik:" << endl;
+    cout << "1. Pravila" << endl;
+    cout << "2. Igraj" << endl;
+    cout << "3. Izlaz" << endl;
+    cout << "Unesite vaš izbor:";
+    cin >> izbor;
+    system("clear");
+
+return 0;
+}
