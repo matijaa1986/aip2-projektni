@@ -24,3 +24,9 @@ void ispisPloce(char ploca[10][10], int ispisBroda)
         cout << endl;
     }
 }
+void unosenjeKoordinata(int *red, int *stupac)
+{
+    cin >> *red >> *stupac;
+    (*red)--;
+    (*stupac)--;
+}
