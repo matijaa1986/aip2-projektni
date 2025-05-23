@@ -1,26 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <iomanip>
+using namespace std;
 
 void ispisPloce(char ploca[10][10], int ispisBroda)
 {
-    printf("  1  2  3  4  5  6  7  8  9  10\n");
+    cout << "  1  2  3  4  5  6  7  8  9  10" << endl;
     for (int i = 0; i < 10; i++)
     {
-        printf("%2d", i + 1);
+        cout << setw(2) << i + 1;
         for (int j = 0; j < 10; j++)
         {
             if (ploca[i][j] == 'V')
-                printf("🌊 ");
+                cout << "🌊 ";
             else if (ploca[i][j] == 'B' && ispisBroda == 1)
-                printf("🚢 ");
+                cout << "🚢 ";
             else if (ploca[i][j] == 'B' && ispisBroda == 0)
-                printf("🌊 ");
+                cout << "🌊 ";
             else if (ploca[i][j] == 'H')
-                printf("💥 ");
+                cout << "💥 ";
             else if (ploca[i][j] == 'X')
-                printf("❌ ");
+                cout << "❌ ";
         }
-        printf("\n");
+        cout << endl;
     }
 }
