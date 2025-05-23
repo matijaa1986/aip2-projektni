@@ -11,15 +11,15 @@ void ispisPloce(char ploca[10][10], int ispisBroda)
         for (int j = 0; j < 10; j++)
         {
             if (ploca[i][j] == 'V')
-                cout << "~ ";
+                cout << "🌊 ";
             else if (ploca[i][j] == 'B' && ispisBroda == 1)
-                cout << "B ";
+                cout << "🚢 ";
             else if (ploca[i][j] == 'B' && ispisBroda == 0)
-                cout << "~ ";
+                cout << "🌊 ";
             else if (ploca[i][j] == 'H')
-                cout << "O ";
+                cout << "💥 ";
             else if (ploca[i][j] == 'X')
-                cout << "X ";
+                cout << "❌ ";
         }
         cout << endl;
     }
@@ -33,7 +33,7 @@ void unosenjeKoordinata(int *red, int *stupac)
 int main()
 {
     int izbor;
-    cout << "       Tin Svinjaric i Matija Štublin" << endl;
+    cout << "       🚢Tin Svinjaric i Matija Štublin💥" << endl;
     cout << "  ____        _   _   _      ____  _     _ " << endl
          << " | __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __" << endl
          << " |  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\" << endl
@@ -42,18 +42,15 @@ int main()
          << "                                          |_|    " << endl;
     cout << endl;
     int igracNaRedu = 1;
-
+    while (1)
+    {
+        cout << "Izbornik:" << endl;
+        cout << "1. Pravila📖" << endl;
+        cout << "2. Igraj🚢" << endl;
+        cout << "3. Izlaz🚫" << endl;
+        cout << "Unesite vaš izbor:";
+        cin >> izbor;
+        system("clear");
+    }
     return 0;
-}
-while (1)
-{
-    cout << "Izbornik:" << endl;
-    cout << "1. Pravila" << endl;
-    cout << "2. Igraj" << endl;
-    cout << "3. Izlaz" << endl;
-    cout << "Unesite vaš izbor:";
-    cin >> izbor;
-    system("clear");
-
-return 0;
 }
