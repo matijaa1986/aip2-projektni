@@ -9,4 +9,3 @@ int main()
     std::cout << "Ožvald";
     std::cout << "Vranic";
 }
-ss
