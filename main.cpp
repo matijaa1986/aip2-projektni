@@ -170,6 +170,7 @@ int main()
                     if (ploca1[red][stupac] == 'B')
                     {
                         cout << "Pogodak! 🚀" << endl;
+                        cout << endl;
                         hit2++;
                         ploca1[red][stupac] = 'H';
                     }
@@ -185,6 +186,12 @@ int main()
                         igracNaRedu = 1;
                 }
             }
+            if (hit1 == 5)
+                cout << "🏆 Pobjednik je " << igrac1 << "! 🏆" << endl
+                     << endl;
+            else
+                cout << "🏆 Pobjednik je " << igrac2 << "! 🏆" << endl
+                     << endl;
         }
     }
 return 0;
