@@ -115,7 +115,40 @@ int main()
             }
             cout << endl;
             system("clear");
-        }
+            int hit1 = 0, hit2 = 0;
+            while (hit1 < brodovi && hit2 < brodovi)
+            {
+                if (igracNaRedu == 1)
+                {
+                    cout << "Ploca protivnicikog igraca (" << igrac2 << "):" << endl;
+                    ispisPloce(ploca2, 0);
+                    cout << endl;
+                    cout << "Ploca igraca koji je na potezu (" << igrac1 << "):" << endl;
+                    ispisPloce(ploca1, 1);
+                    cout << endl;
+
+                    do
+                    {
+                        cout << endl;
+                        cout << igrac1 << ", unesi koordinate gdje zelis ispaliti projektil: ";
+                        unosenjeKoordinata(&red, &stupac);
+                    } while (red < 0 || red >= 10 || stupac < 0 || stupac >= 10);
+
+                    system("clear");
+
+                    if (ploca2[red][stupac] == 'B')
+                    {
+                        cout << "Pogodak! 🚀" << endl;
+                        hit1++;
+                        ploca2[red][stupac] = 'H';
+                    }
+                    else
+                    {
+                        cout << "Promasaj! ❌" << endl;
+                        ploca2[red][stupac] = 'X';
+                    }
+                }
+            }
     }
     return 0;
 }
