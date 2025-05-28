@@ -57,6 +57,7 @@ int main()
             cout << "1. Igra je za dva igraca." << endl;
             cout << "2. Igrači postavljaju 5 brodova na plocu" << endl;
             cout << "3. Cilj igre je prvi potpiti sve protivničke brodove." << endl;
+            cout << endl;
         }
         else if (izbor == 2)
         {
@@ -88,6 +89,32 @@ int main()
             cout << "Ploca igraca 2(" << igrac2 << "):" << endl;
             ispisPloce(ploca2, 0);
             cout << endl;
+            int red, stupac, brodovi = 5;
+            cout << igrac1 << ", postavi svoje brodove:" << endl;
+            for (int i = 0; i < brodovi; i++)
+            {
+                do
+                {
+                    cout << "Unesi koordinate na ploci za brod " << i + 1 << ": ";
+                    unosenjeKoordinata(&red, &stupac);
+                } while (red < 0 || red >= 10 || stupac < 0 || stupac >= 10 || ploca1[red][stupac] == 'B');
+                ploca1[red][stupac] = 'B';
+            }
+            cout << endl;
+            system("clear");
+
+            cout << igrac2 << ", postavi svoje brodove:" << endl;
+            for (int i = 0; i < brodovi; i++)
+            {
+                do
+                {
+                    cout << "Unesi koordinate na ploci za brod " << i + 1 << ": ";
+                    unosenjeKoordinata(&red, &stupac);
+                } while (red < 0 || red >= 10 || stupac < 0 || stupac >= 10 || ploca2[red][stupac] == 'B');
+                ploca2[red][stupac] = 'B';
+            }
+            cout << endl;
+            system("clear");
         }
     }
     return 0;
