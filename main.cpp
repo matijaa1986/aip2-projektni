@@ -51,6 +51,26 @@ int main()
         cout << "Unesite vaš izbor:";
         cin >> izbor;
         system("clear");
+        if (izbor == 1)
+        {
+            cout << "Pravila igre:" << endl;
+            cout << "1. Igra za dva igraca" << endl;
+            cout << "2. Postavljaju 5 brodova na plocu" << endl;
+            cout << "3. Cilj igre je potopiti protivnicku flotu prije nego on potopi tvoju" << endl;
+        }
+        else if (izbor == 2)
+        {
+            cout << "💥 POTAPANJE BRODOVA🚢" << endl;
+            char ploca1[10][10], ploca2[10][10];
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    ploca1[i][j] = 'V';
+                    ploca2[i][j] = 'V';
+                }
+            }
+        }
     }
     return 0;
 }
