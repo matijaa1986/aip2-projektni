@@ -70,6 +70,24 @@ int main()
                     ploca2[i][j] = 'V';
                 }
             }
+            string igrac1, igrac2;
+            cout << "Unesite ime prvog igraca: ";
+            cin.ignore();
+            getline(cin, igrac1);
+
+            cout << "Unesite ime drugog igraca: ";
+            getline(cin, igrac2);
+
+            cout << endl;
+            cout << "Igrac 1 je: " << igrac1 << endl;
+            cout << "Igrac 2 je: " << igrac2 << endl;
+            cout << endl;
+            cout << "Ploca igraca 1(" << igrac1 << "):" << endl;
+            ispisPloce(ploca1, 0);
+            cout << endl;
+            cout << "Ploca igraca 2(" << igrac2 << "):" << endl;
+            ispisPloce(ploca2, 0);
+            cout << endl;
         }
     }
     return 0;
