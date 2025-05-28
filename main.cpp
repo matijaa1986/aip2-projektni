@@ -138,13 +138,15 @@ int main()
 
                     if (ploca2[red][stupac] == 'B')
                     {
-                        cout << "Pogodak! 🚀" << endl;
+                        cout << "Pogodak! 🚀" << endl
+                             << endl;
                         hit1++;
                         ploca2[red][stupac] = 'H';
                     }
                     else
                     {
-                        cout << "Promasaj! ❌" << endl;
+                        cout << "Promasaj! ❌" << endl
+                             << endl;
                         ploca2[red][stupac] = 'X';
                     }
                     igracNaRedu = 2;
