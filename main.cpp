@@ -55,7 +55,7 @@ int main()
         {
             cout << "Pravila igre:" << endl;
             cout << "1. Igra je za dva igraca." << endl;
-            cout << "2. Igrači postavljaju 5 brodova na plocu" << endl;
+            cout << "2. Igrači postavljaju 5 brodova na plocu." << endl;
             cout << "3. Cilj igre je prvi potpiti sve protivničke brodove." << endl;
             cout << endl;
         }
