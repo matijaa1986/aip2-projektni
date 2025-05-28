@@ -54,9 +54,9 @@ int main()
         if (izbor == 1)
         {
             cout << "Pravila igre:" << endl;
-            cout << "1. Igra za dva igraca" << endl;
-            cout << "2. Postavljaju 5 brodova na plocu" << endl;
-            cout << "3. Cilj igre je potopiti protivnicku flotu prije nego on potopi tvoju" << endl;
+            cout << "1. Igra je za dva igraca." << endl;
+            cout << "2. Igrači postavljaju 5 brodova na plocu" << endl;
+            cout << "3. Cilj igre je prvi potpiti sve protivničke brodove." << endl;
         }
         else if (izbor == 2)
         {
