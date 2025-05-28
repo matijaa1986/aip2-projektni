@@ -33,7 +33,7 @@ void unosenjeKoordinata(int *red, int *stupac)
 int main()
 {
     int izbor;
-    cout << "       🚢Tin Svinjaric i Matija Štublin💥" << endl;
+    cout << "       🚢 Tin Svinjaric i Matija Štublin 💥" << endl;
     cout << "  ____        _   _   _      ____  _     _ " << endl
          << " | __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __" << endl
          << " |  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\" << endl
