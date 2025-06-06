@@ -1,6 +1,23 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+#include <algorithm>
+#include <string>
 using namespace std;
+
+struct IgracStatistika
+{
+    string ime;
+    int pobjede;
+    int odigrane_igre;
+
+    IgracStatistika(string n = "", int p = 0, int o = 0) : ime(n), pobjede(p), odigrane_igre(o) {}
+
+    double postotak_pobjeda() const
+    {
+        return odigrane_igre > 0 ? (double)pobjede / odigrane_igre * 100 : 0;
+    }
+};
 
 void ispisPloce(char ploca[10][10], int ispisBroda)
 {
@@ -24,12 +41,139 @@ void ispisPloce(char ploca[10][10], int ispisBroda)
         cout << endl;
     }
 }
+
 void unosenjeKoordinata(int *red, int *stupac)
 {
     cin >> *red >> *stupac;
     (*red)--;
     (*stupac)--;
 }
+
+int ucitajLeaderboard(IgracStatistika leaderboard[], int maxIgraca)
+{
+    ifstream file("leaderboard.txt");
+    string ime;
+    int pobjede, odigrane;
+    int brojIgraca = 0;
+
+    while (file >> ime >> pobjede >> odigrane && brojIgraca < maxIgraca)
+    {
+        leaderboard[brojIgraca] = IgracStatistika(ime, pobjede, odigrane);
+        brojIgraca++;
+    }
+    file.close();
+    return brojIgraca;
+}
+
+void spremiLeaderboard(IgracStatistika leaderboard[], int brojIgraca)
+{
+    ofstream file("leaderboard.txt");
+    for (int i = 0; i < brojIgraca; i++)
+    {
+        file << leaderboard[i].ime << " " << leaderboard[i].pobjede << " " << leaderboard[i].odigrane_igre << endl;
+    }
+    file.close();
+}
+
+int azurirajStatistiku(IgracStatistika leaderboard[], int brojIgraca, const string &pobjednik, const string &igrac1, const string &igrac2, int maxIgraca)
+{
+    bool pronadjen_igrac1 = false, pronadjen_igrac2 = false;
+
+    for (int i = 0; i < brojIgraca; i++)
+    {
+        if (leaderboard[i].ime == igrac1)
+        {
+            leaderboard[i].odigrane_igre++;
+            if (pobjednik == igrac1)
+                leaderboard[i].pobjede++;
+            pronadjen_igrac1 = true;
+        }
+        if (leaderboard[i].ime == igrac2)
+        {
+            leaderboard[i].odigrane_igre++;
+            if (pobjednik == igrac2)
+                leaderboard[i].pobjede++;
+            pronadjen_igrac2 = true;
+        }
+    }
+
+    if (!pronadjen_igrac1 && brojIgraca < maxIgraca)
+    {
+        int pobjede = (pobjednik == igrac1) ? 1 : 0;
+        leaderboard[brojIgraca] = IgracStatistika(igrac1, pobjede, 1);
+        brojIgraca++;
+    }
+    if (!pronadjen_igrac2 && brojIgraca < maxIgraca)
+    {
+        int pobjede = (pobjednik == igrac2) ? 1 : 0;
+        leaderboard[brojIgraca] = IgracStatistika(igrac2, pobjede, 1);
+        brojIgraca++;
+    }
+
+    return brojIgraca;
+}
+
+void sortirajLeaderboard(IgracStatistika leaderboard[], int brojIgraca)
+{
+    for (int i = 0; i < brojIgraca - 1; i++)
+    {
+        for (int j = 0; j < brojIgraca - i - 1; j++)
+        {
+            bool treba_zamjena = false;
+
+            if (leaderboard[j].pobjede < leaderboard[j + 1].pobjede)
+            {
+                treba_zamjena = true;
+            }
+            else if (leaderboard[j].pobjede == leaderboard[j + 1].pobjede)
+            {
+                if (leaderboard[j].postotak_pobjeda() < leaderboard[j + 1].postotak_pobjeda())
+                {
+                    treba_zamjena = true;
+                }
+            }
+
+            if (treba_zamjena)
+            {
+                IgracStatistika temp = leaderboard[j];
+                leaderboard[j] = leaderboard[j + 1];
+                leaderboard[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void prikaziLeaderboard()
+{
+    const int MAX_IGRACA = 100;
+    IgracStatistika leaderboard[MAX_IGRACA];
+    int brojIgraca = ucitajLeaderboard(leaderboard, MAX_IGRACA);
+
+    if (brojIgraca == 0)
+    {
+        cout << "🏆 LEADERBOARD 🏆" << endl;
+        cout << "Nema još odigranih igara!" << endl;
+        return;
+    }
+
+    sortirajLeaderboard(leaderboard, brojIgraca);
+
+    cout << "🏆 LEADERBOARD 🏆" << endl;
+    cout << "==============================================" << endl;
+    cout << left << setw(15) << "IGRAČ" << setw(10) << "POBJEDE"
+         << setw(12) << "ODIGRANE" << "POSTOTAK" << endl;
+    cout << "==============================================" << endl;
+
+    for (int i = 0; i < brojIgraca; i++)
+    {
+        cout << left << setw(15) << leaderboard[i].ime
+             << setw(10) << leaderboard[i].pobjede
+             << setw(12) << leaderboard[i].odigrane_igre
+             << fixed << setprecision(1) << leaderboard[i].postotak_pobjeda() << "%" << endl;
+    }
+    cout << "==============================================" << endl;
+}
+
 int main()
 {
     int izbor;
@@ -37,20 +181,23 @@ int main()
     cout << "  ____        _   _   _      ____  _     _ " << endl
          << " | __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __" << endl
          << " |  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\" << endl
-         <<   " | |_) | (_| | |_| |_| |  __/___) | | | | | |_) |" << endl
+         << " | |_) | (_| | |_| |_| |  __/___) | | | | | |_) |" << endl
          << " |____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/ " << endl
          << "                                          |_|    " << endl;
     cout << endl;
     int igracNaRedu = 1;
+
     while (1)
     {
         cout << "Izbornik:" << endl;
         cout << "1. Pravila📖" << endl;
         cout << "2. Igraj🚢" << endl;
-        cout << "3. Izlaz🚫" << endl;
+        cout << "3. Leaderboard🏆" << endl;
+        cout << "4. Izlaz🚫" << endl;
         cout << "Unesite vaš izbor:";
         cin >> izbor;
         system("clear");
+
         if (izbor == 1)
         {
             cout << "Pravila igre:" << endl;
@@ -188,20 +335,40 @@ int main()
                         igracNaRedu = 1;
                 }
             }
+
+            string pobjednik;
             if (hit1 == 5)
+            {
                 cout << "🏆 Pobjednik je " << igrac1 << "! 🏆" << endl
                      << endl;
+                pobjednik = igrac1;
+            }
             else
+            {
                 cout << "🏆 Pobjednik je " << igrac2 << "! 🏆" << endl
                      << endl;
+                pobjednik = igrac2;
+            }
+
+            const int MAX_IGRACA = 100;
+            IgracStatistika leaderboard[MAX_IGRACA];
+            int brojIgraca = ucitajLeaderboard(leaderboard, MAX_IGRACA);
+            brojIgraca = azurirajStatistiku(leaderboard, brojIgraca, pobjednik, igrac1, igrac2, MAX_IGRACA);
+            spremiLeaderboard(leaderboard, brojIgraca);
+
+            cout << "Statistike su ažurirane! 📊" << endl;
         }
         else if (izbor == 3)
         {
-            cout << "    *    *            *         *   *         *____                      _  " << endl
-                 << "   | |  | |          | |       | \\ | |       |_   *|                    (*) " << endl
-                 << "   | |__| |_   ____ *| | *_ *  |  \\| | *_ *    | |  *_ * *__ __ * *__  * *  _ " << endl
-                 << "   |  __  \\ \\ / / ` | |/ ` | | . ` |/ `* |   | | / *` | '__/ `* | '* \\| | | | |" << endl
-                 << "   | |  | |\\ v / (_| | | (_| | | |\\  | (_| |  *| | ||*(_| | | | (_| | | | | |_| | " << endl
+            prikaziLeaderboard();
+        }
+        else if (izbor == 4)
+        {
+            cout << "    _    _            _         _    _        _____                      _  " << endl
+                 << "   | |  | |          | |       | \\ | |       |_   _|                    (_) " << endl
+                 << "   | |__| |_   ____ _| | __ _  |  \\| | ___     | |  ___ ___ __ _ -__  - _  _ " << endl
+                 << "   |  __  \\ \\ / / ` | |/ ` | | . ` |/ `_ |     | |/ _` | '__/ `_ | '_ \\| | |  | |" << endl
+                 << "   | |  | |\\ v / (_| | | (_| | | |\\  | (_| |  _| | ||_(_| | | | (_| | | | | |_| | " << endl
                  << "   |_|  |_| \\_/ \\__,_|_|\\__,_| |_| \\_|\\__,_| |_____\\__, |_|  \\__,_|_| |_| |\\__,_|" << endl
                  << "                                                    __/ |              _/ |      " << endl
                  << "                                                   |___/              |__/       " << endl;
@@ -215,5 +382,5 @@ int main()
              << endl
              << endl;
     }
-return 0;
+    return 0;
 }
