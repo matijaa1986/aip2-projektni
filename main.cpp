@@ -198,7 +198,6 @@ bool spremiIgru(char ploca1[10][10], char ploca2[10][10], const string &igrac1, 
 
     SpremenjenoStanje stanje;
 
-    // Kopiranje ploča
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
@@ -208,7 +207,6 @@ bool spremiIgru(char ploca1[10][10], char ploca2[10][10], const string &igrac1, 
         }
     }
 
-    // Kopiranje imena (osiguravamo da su null-terminated)
     strncpy(stanje.ime1, igrac1.c_str(), 49);
     stanje.ime1[49] = '\0';
     strncpy(stanje.ime2, igrac2.c_str(), 49);
@@ -245,7 +243,6 @@ bool ucitajIgru(char ploca1[10][10], char ploca2[10][10], string &igrac1, string
         return false;
     }
 
-    // Kopiranje podataka iz strukture
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
@@ -276,7 +273,6 @@ void pokreniIgru(bool ucitanaIgra = false, char ploca1[10][10] = nullptr, char p
 
     if (ucitanaIgra)
     {
-        // Kopiraj učitane podatke
         for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 10; j++)
@@ -294,7 +290,6 @@ void pokreniIgru(bool ucitanaIgra = false, char ploca1[10][10] = nullptr, char p
     }
     else
     {
-        // Nova igra
         cout << "💥 POTAPANJE BRODOVA🚢" << endl;
 
         for (int i = 0; i < 10; i++)
@@ -352,7 +347,6 @@ void pokreniIgru(bool ucitanaIgra = false, char ploca1[10][10] = nullptr, char p
         lokalniIgracNaRedu = 1;
     }
 
-    // Glavna petlja igre
     int red, stupac;
     while (lokalniHit1 < lokalniBrodovi && lokalniHit2 < lokalniBrodovi)
     {
@@ -442,8 +436,6 @@ void pokreniIgru(bool ucitanaIgra = false, char ploca1[10][10] = nullptr, char p
             lokalniIgracNaRedu = 1;
         }
     }
-
-    // Završetak igre
     string pobjednik;
     if (lokalniHit1 == lokalniBrodovi)
     {
@@ -466,7 +458,6 @@ void pokreniIgru(bool ucitanaIgra = false, char ploca1[10][10] = nullptr, char p
 
     cout << "Statistike su ažurirane! 📊" << endl;
 
-    // Obriši spremljenu igru nakon završetka
     remove("saved_game.dat");
 }
 
